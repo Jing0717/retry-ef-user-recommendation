@@ -20,3 +20,13 @@ code {
   width: 100%;
 
 }
+.slick-next {
+  right: -45px;
+}
+.slick-slider .slick-prev:before, .slick-slider .slick-next:before{
+  font-family: none;
+  font-size: 25px;
+  line-height: 1;
+  opacity: .75;
+  color: white;
+}

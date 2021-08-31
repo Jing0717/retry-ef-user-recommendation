@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import logo from './logo2.png';
-import banner from './banner.png'
+import banner from './banner.png';
+import male from './male.png';
+import female from './female.png';
 import './App.css';
 
-import { Layout, Menu, Breadcrumb, Card, Avatar, Button, Modal } from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Avatar, Button, Modal, Space } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
 import Slider from "react-slick";
@@ -17,11 +19,11 @@ const SampleNextArrow = (props) => {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "#007D8A" }}
+      style={{ ...style, display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", background: "#0097BF", zIndex: "1", right: "-45px" }}
       onClick={onClick}
     />
   );
-}
+};
 
 const SamplePrevArrow = (props) => {
   const { className, style, onClick } = props;
@@ -29,7 +31,7 @@ const SamplePrevArrow = (props) => {
     <div
       className={className}
       style={{
-        ...style, display: "block", background: "#007D8A"
+        ...style, display: "flex", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", background: "#0097BF", zIndex: "1", left: "-45px"
       }}
       onClick={onClick}
     />
@@ -74,70 +76,56 @@ const settings = {
 
 const data = [
   {
-    id: 1,
-    name: "周肅玲  54歲",
-    content: "未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "陳阿華  63歲",
+    content: "謝謝益富益力壯，讓我每天都能攝取均衡的營養，並有足夠的體力可以照顧孩子，之後我也會繼續用益富益力壯，並推薦給身邊所有辛苦照顧小孩的爸爸媽媽！",
+    sex: "f"
   },
   {
-    id: 2,
-    name: "楊玉絨  51歲–55歲",
-    content: "未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "李佳蓉  36歲",
+    content: "我還把益富益力壯帶到公司跟同事們分享，他們試喝後也覺得不錯。而且瓶裝設計很方便攜帶，隨時隨地都能即時補充營養，真的是我們上班族的好朋友！",
+    sex: "f"
   },
   {
-    id: 3,
-    name: "林樹蘭  71歲–75歲",
-    content: "未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "宋曉真  36歲",
+    content: "謝謝益富益力壯，讓我每天都能攝取均衡的營養，並有足夠的體力可以照顧孩子，之後我也會繼續用益富益力壯，並推薦給身邊所有辛苦照顧小孩的爸爸媽媽！",
+    sex: "f"
   },
   {
-    id: 4,
-    name: "張月玲  60歲",
-    content: "未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "劉家維  36歲",
+    content: "感謝益富益力壯，給了我平日所需的營養，讓我有充足的體力在工廠拚下去，也讓我有時間和精力去陪伴我最愛的家人們！",
+    sex: "m"
   },
   {
-    id: 5,
-    name: "周韋伶  64歲",
-    content: "未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "陳春美  61歲–65歲",
+    content: "連續好幾天飲用益富益力壯之後，明顯感覺到體力變得比較好且有精神，走樓梯到三樓也蠻輕鬆的，去運動的時候也覺得很有活力。",
+    sex: "f"
   },
   {
-    id: 6,
-    name: "侯本志  48歲",
-    content: "未來我會繼續使用益富，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+    name: "李仁祥  46歲–50歲",
+    content: "感謝益富益力壯，給了我平日所需的營養，讓我有充足的體力在工廠拚下去，也讓我有時間和精力去陪伴我最愛的家人們！",
+    sex: "m"
   },
-]
+];
 function App() {
   // antd modal settings
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState("");
 
   const showModal = (index) => {
-    setIsModalVisible(true);
-    console.log(index);
-    return <>
-      <Modal
-        // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-        title="楊玉絨" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-      </Modal>
-      <Meta
-        title="楊玉絨  51歲–55歲"
-        description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-      />
-    </>
+    setIsModalOpen(index);
   };
 
   const handleOk = () => {
-    setIsModalVisible(false);
+    setIsModalOpen("");
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);
+    setIsModalOpen("");
   };
   return (
     <div className="App">
       <Layout className="layout">
         <Header>
-          {/* <div className="logo" /> */}
           <img className="logo" src={logo} alt="" />
-          {/* <img src="logo2.png" alt="" /> */}
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
             {/* {new Array(3).fill(null).map((_, index) => {
               const key = index + 1;
@@ -155,192 +143,32 @@ function App() {
             <img className="banner" src={banner} alt="banner" />
             <Slider {...settings}>
               {data.map((item, index) => {
-                const key = index + 1;
-                console.log(index)
                 return <Card
-                    style={{ width: 300 }}
-                    cover={
-                      <img
-                        alt="example"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                      />
-                    }
-                    actions={[
-                      <Button type="primary" onClick={showModal}>
-                        繼續閱讀
-                      </Button>
-                    ]}
-                    key={index}
-                  >
-                    <Modal
-                      // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                      title="楊玉絨" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                      <p>{item.name}</p>
-                    </Modal>
-                    <Meta
-                      title={item.name}
-                      description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+                  style={{ width: 300, marginLeft: '20px' }}
+                  cover={
+                    <img
+                      alt="example"
+                      src={item.sex === 'f' ? female : male}
                     />
-                  </Card>
-                
+                  }
+                  actions={[
+                    <Button type="primary"
+                    style={{ backgroundColor:"#0081A4", borderColor: "#0081A4" }}
+                      onClick={() => showModal(index)}>繼續閱讀</Button>
+                  ]}
+                  key={index}
+                >
+                  <Modal
+                    // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title={item.name} visible={isModalOpen === index} onOk={handleOk} onCancel={handleCancel}>
+                    <p>{item.content}</p>
+                  </Modal>
+                  <Meta
+                    title={item.name}
+                    description={item.content}
+                  />
+                </Card>;
               })}
-              {/* <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal
-                  // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                  title="楊玉絨" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="楊玉絨  51歲–55歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="林樹蘭  71歲–75歲" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="林樹蘭  71歲–75歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="張月玲  60歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-
-                  title="周韋伶  64歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="侯本志  48歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="何語婷  43歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card>
-              <Card
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={[
-                  <Button type="primary" onClick={showModal}>
-                    繼續閱讀
-                  </Button>
-                ]}
-              >
-                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
-                </Modal>
-                <Meta
-                  title="周肅玲  54歲"
-                  description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
-                />
-              </Card> */}
             </Slider>
 
           </div>
