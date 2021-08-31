@@ -173,7 +173,7 @@ function App() {
 
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2021 Created by Jing Wu</Footer>
+        <Footer style={{ textAlign: 'center' }}>Copyright©2020 eNutrition. All Rights Reserved.</Footer>
       </Layout>
     </div>
   );
