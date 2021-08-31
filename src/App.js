@@ -108,8 +108,20 @@ function App() {
   // antd modal settings
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
+  const showModal = (index) => {
     setIsModalVisible(true);
+    console.log(index);
+    return <>
+      <Modal
+        // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+        title="楊玉絨" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
+      </Modal>
+      <Meta
+        title="楊玉絨  51歲–55歲"
+        description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+      />
+    </>
   };
 
   const handleOk = () => {
@@ -142,7 +154,37 @@ function App() {
           <div className="site-layout-content">
             <img className="banner" src={banner} alt="banner" />
             <Slider {...settings}>
-              <Card
+              {data.map((item, index) => {
+                const key = index + 1;
+                console.log(index)
+                return <Card
+                    style={{ width: 300 }}
+                    cover={
+                      <img
+                        alt="example"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                      />
+                    }
+                    actions={[
+                      <Button type="primary" onClick={showModal}>
+                        繼續閱讀
+                      </Button>
+                    ]}
+                    key={index}
+                  >
+                    <Modal
+                      // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                      title="楊玉絨" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                      <p>{item.name}</p>
+                    </Modal>
+                    <Meta
+                      title={item.name}
+                      description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
+                    />
+                  </Card>
+                
+              })}
+              {/* <Card
                 style={{ width: 300 }}
                 cover={
                   <img
@@ -251,7 +293,6 @@ function App() {
                   <p>未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯</p>
                 </Modal>
                 <Meta
-
                   title="侯本志  48歲"
                   description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
                 />
@@ -299,7 +340,7 @@ function App() {
                   title="周肅玲  54歲"
                   description="未來我會繼續使用益富益力壯，讓退休後生活可以更安穩，也讓家人們放心。我也會跟身邊親友分享我的經驗，建議他們一起試試益富益力壯。"
                 />
-              </Card>
+              </Card> */}
             </Slider>
 
           </div>
